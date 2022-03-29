@@ -23,7 +23,7 @@ class LatestMovieReviewsContainer extends Component{
 
   render() {
     return (
-      this.state.reviews.map((review) => < MovieReviews display_title={review.display_title} summary_short={review.summary_short} src={review.multimedia.src} />)
+      this.state.reviews.map((review, index) => < MovieReviews display_title={review.display_title} summary_short={review.summary_short} src={review.multimedia.src} link_url={review.link.url} index={index} />)
     )
 
 
