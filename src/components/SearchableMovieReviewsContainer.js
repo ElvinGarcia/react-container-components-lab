@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import MovieReviews from './MovieReviews'
 import 'isomorphic-fetch';
+
 const NYT_API_KEY = 'sXzTtSdQeXAmpkX6R2gXyOBk5e38pl8R';
 const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/search.json?'
-            + `api-key=${NYT_API_KEY}`;
+            + `api-key=${NYT_API_KEY}&query=`;
 
 
 class SearchableMovieReviewsContainer extends Component{
@@ -15,33 +16,30 @@ class SearchableMovieReviewsContainer extends Component{
     };
   };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
-    fetch(URL + '&query=' + this.state.input)
+    fetch(URL+this.state.input)
       .then((response) => response.json())
       .then((data) => this.setState({ reviews: data.results }))
       .catch(console.error('an error occured'))
-
   }
 
-  handleChange(event) {
-    this.setState({data: `${event.target.value}`})
-  }
+  handleChange = (event)=> this.setState({ input: event.target.value });
+
+
+
+
 
   render() {
     return (
       <div>
-        <form onSubmit={(event)=>this.handleSubmit(event)}>
-  <input type="text" value={this.state.value} placeholder='search' onChange={(event) => this.handleChange(event)} />
+        <form onSubmit={this.handleSubmit}>
+  <input type="text" placeholder='search' onChange={this.handleChange} focus= "true" />
           <button value="search" type="submit">search</button>
         </form>
 
-        {/* should display the components below if this.state.reviews is not empty. I should be passing the entire state over to < MovieReviews /> component */}
-         < MovieReviews reviews={this.state.reviews} />)
-
-
-
-
+        {typeof this.state.reviews ==='object' && this.state.reviews.length > 0 && <h1>Movie Results</h1> }
+        <MovieReviews reviews={this.state.reviews}/>
       </div>
 
 

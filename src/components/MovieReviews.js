@@ -6,7 +6,7 @@ const Review = ({display_title, link, summary_short, headline, multimedia }) => 
     <li key={display_title}>
       <h1>{display_title}</h1>
       <h2>{headline}</h2>
-      <a href={link.url}><img src={multimedia.src} alt={display_title} /></a>
+      <a href={link.url}><img src={multimedia ? multimedia.src : link.url  } alt={display_title} /></a>
       <h3>{summary_short}</h3>
     </li>
   </ul>
