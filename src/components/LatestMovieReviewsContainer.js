@@ -23,7 +23,7 @@ class LatestMovieReviewsContainer extends Component{
 
   render() {
     return (
-      <div>
+      <div className='latest-movie-reviews'>
         {typeof this.state.reviews ==='object' && this.state.reviews.length > 0 && <h1>Latest Movie Reviews</h1>}
         <MovieReviews reviews={this.state.reviews} />
       </div>

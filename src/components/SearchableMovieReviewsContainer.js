@@ -11,20 +11,20 @@ class SearchableMovieReviewsContainer extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      input: "",
+      searchTerm: "",
       reviews: [],
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    fetch(URL+this.state.input)
+    fetch(URL+this.state.searchTerm)
       .then((response) => response.json())
       .then((data) => this.setState({ reviews: data.results }))
       .catch(console.error('an error occured'))
   }
 
-  handleChange = (event)=> this.setState({ input: event.target.value });
+  handleChange = (event)=> this.setState({ searchTerm: event.target.value });
 
 
 
@@ -32,7 +32,7 @@ class SearchableMovieReviewsContainer extends Component{
 
   render() {
     return (
-      <div>
+      <div className='searchable-movie-reviews'>
         <form onSubmit={this.handleSubmit}>
   <input type="text" placeholder='search' onChange={this.handleChange} focus= "true" />
           <button value="search" type="submit">search</button>
